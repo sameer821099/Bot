@@ -16,11 +16,11 @@ def download_youtube(url, audio_only=False):
     ydl_opts = {
         'format': 'bestaudio' if audio_only else 'best',
         'outtmpl': 'downloads/%(title)s.%(ext)s',
+        'cookiefile': 'cookies.txt'  # ← This line enables authentication
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
         return ydl.prepare_filename(info)
-
 # 📸 Function to download Instagram videos
 def download_instagram(url):
     os.system(f"instaloader -- -{url.split('/')[-2]}")  # Downloads to current dir
